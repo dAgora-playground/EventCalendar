@@ -84,7 +84,11 @@ async function main() {
 // 创建并插入事件
 function createAndInsertEvent(coriEvent) {
   const metadata = coriEvent.metadata;
-  const timeString = metadata.content.attributes.find(attr => attr.trait_type === 'time').value;
+  const timeString = metadata.content.attributes.find(attr => attr.trait_type === 'time')?.value;
+  if(!timeString) {
+    console.error('No time found in event:', coriEvent);
+    return;
+  }
   const startTime = new Date(timeString);
   const endTime = new Date(
     startTime.getTime() + EVENT_DURATION_MINUTES * 60000
