@@ -5,9 +5,15 @@ const keys = require("./service-account-keys.json");
 const axios = require("axios");
 const fs = require("fs");
 const config = require("./config.json");
+const path = require("path");
+
 
 // 设置全局常量
-const existingEventsFile = "./existing-events.json";
+const fn = "existing-events.json";
+const existingEventsFile = path.resolve(__dirname, fn);
+console.log(fn,existingEventsFile)
+
+
 const EVENT_DURATION_MINUTES = 60;
 
 // 初始化 Google Calendar 客户端
